@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import serg.utils.classes.Rooms;
 import serg.utils.interfaces.Room;
 
+import java.util.ArrayList;
+
 /**
  * Created by jc on 26.01.18.
  */
@@ -67,5 +69,14 @@ public class MainController {
     public String addRoom() {
         Rooms.addRoom("desert");
         return "redirect:/rooms";
+    }
+
+    @RequestMapping(value = "/rooms")
+    public ModelAndView rooms() {
+
+        ModelAndView page = new ModelAndView("rooms");
+        page.addObject("rooms", new ArrayList<>(Rooms.getRooms().keySet()));
+
+        return page;
     }
 }
